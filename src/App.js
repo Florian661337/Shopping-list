@@ -16,16 +16,13 @@ function App() {
       oReq.send();
       oReq.onload = function (e) {
 
-        console.log(e.target.response);
         setProducts(e.target.response);
 
       }
   }, [])
 
-
- 
   let productsHtml = products.map( (product, index) => {
-    return  <div id={product.id_produit} key={product.id_produit} className="todo-row">
+    return  <div id={product.id_produit} key={index} className="todo-row">
                 {/* {console.log(product.id_produit)} */}
                   <div>{product.nom_produit} - {product.quantite_produit}</div>
                   <div className="icons"></div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import App from './../App';
-   
+// import App from '.././App';
 
+   
  function TodoForm(props) {
   const [input, setInput] = useState(props.edit ? props.edit.value : '');
 
@@ -18,7 +18,6 @@ import App from './../App';
   const handleSubmit = e => {
         if(input !=='' && inputValue >=1){
           e.preventDefault();
-         
           let oReq = new XMLHttpRequest();
           oReq.open("POST", "http://localhost/Shopping-list/src/add.php");
           oReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -41,12 +40,13 @@ import App from './../App';
     const handleEdit = e => {
       if(input !=='' && inputValue >=1){
         e.preventDefault();
-        let id = '';
+        let id = document.querySelector('.todo-row').id;
         let oReq = new XMLHttpRequest();
         oReq.open("POST", "http://localhost/Shopping-list/src/edit.php");
         oReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         oReq.responseType= "text";
         oReq.send(`nom_produit=${input}&quantite_produit=${inputValue}}&id=${id}`);
+       
         props.onSubmit({
           id: Math.floor(Math.random() * 10000),
           text: input,
@@ -67,6 +67,7 @@ import App from './../App';
     <form onSubmit={handleSubmit} className='todo-form'>
       {props.edit ? (
         <>
+        <input type="hidden" name="id" value='' className="ID"/>
         <input type="number" className="todo-input-quantity" min="1" max="10" value={inputValue} onChange={(event) => setInputValue(event.target.value)} />
           <input
             placeholder='Update your item'
@@ -98,7 +99,10 @@ import App from './../App';
           </button>
         </>
       )}
+    
     </form>
+   
+   
   );
 }
 
