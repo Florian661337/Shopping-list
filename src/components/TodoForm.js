@@ -16,8 +16,7 @@ import React, { useState, useEffect, useRef } from 'react';
   };
 
   const handleSubmit = e => {
-        if(input !=='' && inputValue >=1){
-          e.preventDefault();
+       
           let oReq = new XMLHttpRequest();
           oReq.open("POST", "http://localhost/Shopping-list/src/add.php");
           oReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -31,9 +30,6 @@ import React, { useState, useEffect, useRef } from 'react';
         });
         setInput('');
         setInputValue('');
-      }else{
-        alert('Veuillez rentrez un produit avec une quantité supérieur a zero')
-      }
     }
 
 
@@ -64,7 +60,7 @@ import React, { useState, useEffect, useRef } from 'react';
 
 
   return (
-    <form onSubmit={handleSubmit} className='todo-form'>
+    <form className='todo-form'>
       {props.edit ? (
         <>
         <input type="hidden" name="id" value='' className="ID"/>

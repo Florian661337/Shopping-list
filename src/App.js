@@ -1,12 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
+import TodoForm from './components/TodoForm'
+import Todo from './components/Todo'
 import TodoList from './components/TodoList';
+import { RiCloseCircleLine } from 'react-icons/ri';
+import { TiEdit } from 'react-icons/ti';
 
 
 function App() {
 
     const [products, setProducts] = useState([])
 
+  
     useEffect(()=>{
       let oReq = new XMLHttpRequest();
       oReq.open("POST", "http://localhost/Shopping-list/src/connexion.php");
@@ -21,14 +26,17 @@ function App() {
       }
   }, [])
 
+
   let productsHtml = products.map( (product, index) => {
     return  <div id={product.id_produit} key={index} className="todo-row">
                 {/* {console.log(product.id_produit)} */}
                   <div>{product.nom_produit} - {product.quantite_produit}</div>
-                  <div className="icons"></div>
+                  <div className="icons">
+                  <TiEdit  className='edit-icon'/>|<RiCloseCircleLine className='delete-icon'/>
+                 </div>
             </div>
-
   } )
+
   return (
     <div className='todo-app'>
       <TodoList />
