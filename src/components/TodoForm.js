@@ -7,7 +7,10 @@ import React, { useState, useEffect, useRef } from 'react';
 
   const inputRef = useRef(null);
 
+  
+
   useEffect(() => {
+    
     inputRef.current.focus();
   });
 
